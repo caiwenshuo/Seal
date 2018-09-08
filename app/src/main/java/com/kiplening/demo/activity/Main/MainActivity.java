@@ -369,7 +369,10 @@ public class MainActivity extends BaseActivity implements MainView {
         super.onDestroy();
     }
 
-    //Activity 跳转
+    /**
+     * Activity 跳转
+     */
+
     @Override
     public void navigationToSetting() {
 
