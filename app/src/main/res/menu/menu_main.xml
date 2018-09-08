@@ -1,6 +1,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_settings" android:title="ii"
-        android:orderInCategory="100" app:showAsAction="ifRoom" />
+    <!--item android:id="@+id/action_settings" android:title="ii"
+        android:orderInCategory="100" app:showAsAction="ifRoom" -->
+    <!-- Settings, should always be in the overflow -->
+    <item
+        android:id="@+id/notification"
+        android:checkable="true"
+        android:orderInCategory="2"
+        android:title="@string/notification"
+        android:visible="true" />
+    <item
+        android:id="@+id/action_check"
+        android:title="@string/action_check"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        android:visible="true"
+        android:checkable="true" />
+    <item android:id="@+id/about"
+        android:orderInCategory="3"
+        android:title="@string/about"
+        app:showAsAction="never"></item>
 </menu>

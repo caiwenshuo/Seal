@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">应用锁</string>
+    <string name="app_name">封印</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title">封印</string>
+    <string name="notification">开启常驻通知栏</string>
+    <string name="action_check">开启封印</string>
+    <string name="about">关于</string>
 </resources>

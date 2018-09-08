@@ -67,7 +67,7 @@ public class LockService extends Service{
             return Service.START_STICKY;
         }else{
             //开始循环检查
-            mHandler = new Handler(handlerThread.getLooper()) {
+            mHandler = new Handler(handlerThread.getLooper()) {  //getlooper 创建looper
                 public void dispatchMessage(android.os.Message msg) {
                     switch (msg.what) {
                         case LOOPHANDLER:
@@ -101,7 +101,7 @@ public class LockService extends Service{
                             }
                             break;
                     }
-                    mHandler.sendEmptyMessageDelayed(LOOPHANDLER, cycleTime);
+                    mHandler.sendEmptyMessageDelayed(LOOPHANDLER, cycleTime);    //循环执行
                 }
             };
             mHandler.sendEmptyMessage(LOOPHANDLER);

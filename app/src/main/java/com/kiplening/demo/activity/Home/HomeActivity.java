@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,7 +29,8 @@ import butterknife.InjectView;
 /**
  * Created by MOON on 4/17/2016.
  */
-public class HomeActivity extends BaseActivity implements HomeView {
+public class
+HomeActivity extends BaseActivity implements HomeView {
 
     private Activity act;
     private HomePresenter presenter;
@@ -103,6 +105,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void navigationToMain() {
+
         Intent intent = new Intent(HomeActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

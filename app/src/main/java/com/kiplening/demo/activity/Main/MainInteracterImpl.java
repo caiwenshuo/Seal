@@ -1,6 +1,7 @@
 package com.kiplening.demo.activity.Main;
 
 import android.content.Context;
+import android.widget.BaseAdapter;
 
 import com.kiplening.demo.MainApplication;
 import com.kiplening.demo.module.App;
@@ -35,4 +36,8 @@ public class MainInteracterImpl implements MainInteracter {
         list = dataBaseUtil.getAll();
         return list;
     }
+    public interface myCallBack {
+        public void notifydata(BaseAdapter adapter);
+    }
+
 }

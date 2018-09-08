@@ -52,8 +52,12 @@
 	<color name="yellow_lemon">#FFFACD</color>
 	<color name="gray_light">#DFDFDF</color>
 	<color name="gray_white">#F5F5F5</color>
+	<color name="gray_dark">#C0C0C0</color>
 	<color name="gray_slate">#708090</color>
 	<color name="blue_light">#0083FF</color>
+	<color name="primary_purple">#6200EE</color>
+	<color name="second_purple">#3700B3</color>
+	<color name="third_purple">#BB86FC</color>
 
 
 

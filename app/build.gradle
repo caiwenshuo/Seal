@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.kiplening.asLockApp"
@@ -17,6 +17,12 @@ android {
         packagingOptions {
             exclude "lib/arm64-v8a/libgnustl_shared.so"
         }
+        javaCompileOptions {
+            // 显式声明支持注解
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
     buildTypes {
         release {
@@ -27,9 +33,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.google.code.gson:gson:2.2.+'
     //compile "com.facebook.react:react-native:0.42.3"
     compile project(path: ':androidlib')
+    implementation 'com.android.support:design:23.3.0'
 }
