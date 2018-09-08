@@ -50,7 +50,6 @@ public class MainActivity extends BaseActivity implements MainView {
     private DataBaseUtil dataBaseUtil;
     private String status;
     private static String TAG = "MAINACTIVITY";
-    private View preview;
     private int prePosition;
     private int SELECTED=0;
     private int UNSELECTED=1;
@@ -269,7 +268,7 @@ public class MainActivity extends BaseActivity implements MainView {
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                myList.setSelector(new ColorDrawable(getResources().getColor(R.color.gray_white)));
+                myList.setSelector(new ColorDrawable(getResources().getColor(R.color.third_purple)));
                 if (position==prePosition){
                     judge(position);
 
