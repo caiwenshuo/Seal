@@ -20,7 +20,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         System.out.println("Create a DataBase.");
 
-        db.execSQL("create table app(packageName text PRIMARY KEY,name text)");
+        db.execSQL("create table app(packageName text PRIMARY KEY,name text,date text)");
         db.execSQL("create table settings(id text PRIMARY KEY,status text,password text,email text)");
         db.execSQL("INSERT INTO settings (id,status,password,email) VALUES ('host','true','123456','null')");
     }

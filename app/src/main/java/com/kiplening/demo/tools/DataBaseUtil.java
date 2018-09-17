@@ -50,11 +50,11 @@ public class DataBaseUtil {
         ArrayList<App> lockList = new ArrayList<>();
         Cursor c = db.rawQuery("select * from " + tableName, null);
         if (c.moveToFirst()) { //判断游标是否为空
-            App a = new App(c.getString(c.getColumnIndex("packageName")), c.getString(c.getColumnIndex("name")));
+            App a = new App(c.getString(c.getColumnIndex("packageName")), c.getString(c.getColumnIndex("name")),c.getString(c.getColumnIndex("date")));
             lockList.add(a);
             for (int i = 0; i < c.getCount(); i++) {
                 if (c.moveToNext()) {
-                    App app = new App(c.getString(c.getColumnIndex("packageName")), c.getString(c.getColumnIndex("name")));
+                    App app = new App(c.getString(c.getColumnIndex("packageName")), c.getString(c.getColumnIndex("name")),c.getString(c.getColumnIndex("date")));
                     lockList.add(app);
                 }
             }
@@ -80,6 +80,7 @@ public class DataBaseUtil {
         ContentValues cv = new ContentValues();
         cv.put("packageName", app.getPackageName());
         cv.put("name", app.getName());
+        cv.put("date",app.getDate());
         Long result = db.insert(tableName, null, cv);
         return result;
     }

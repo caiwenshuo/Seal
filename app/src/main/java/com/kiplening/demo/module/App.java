@@ -7,9 +7,14 @@ public class App {
     private String packageName;
     private String name;
 
-    public App(String packageName, String name) {
+
+
+    private String date;
+
+    public App(String packageName, String name,String date) {
         this.packageName = packageName;
         this.name = name;
+        this.date = date;
     }
 
     public String getPackageName() {
@@ -22,6 +27,10 @@ public class App {
 
     public String getName() {
         return name;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public void setName(String name) {

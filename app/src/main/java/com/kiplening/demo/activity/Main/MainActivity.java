@@ -33,7 +33,9 @@ import com.kiplening.demo.tools.CategoryAdapter;
 import com.kiplening.demo.tools.DataBaseUtil;
 import com.kiplening.demo.tools.ListViewAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -51,9 +53,11 @@ public class MainActivity extends BaseActivity implements MainView {
     private String status;
     private static String TAG = "MAINACTIVITY";
     private int prePosition;
+    private DatePickerFragment datePicker;
     private int SELECTED=0;
     private int UNSELECTED=1;
     private int isSelected=1;
+    private Calendar calendar;
 
 
     @InjectView(R.id.list)
@@ -307,44 +311,58 @@ public class MainActivity extends BaseActivity implements MainView {
         });
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
-                int position;
-                position = prePosition - lock_listItems.size()-2;
-                App app = new App((String) listItems.get(position).get("packageName"),(String) listItems.get(position).get("name"));
+                datePicker = new DatePickerFragment();
+                datePicker.setOnDateInputListener(new DatePickerFragment.OnDateInputListener() {
+                    @Override
+                    public void getDate(int year, int month, int day) {
+                        calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR,year);
+                        calendar.set(Calendar.MONTH,month);
+                        calendar.set(Calendar.DAY_OF_MONTH,day);
+                        int position;
+                        position = prePosition - lock_listItems.size()-2;
+                        SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd");
+                        String date = df.format(calendar.getTime());
+                        System.out.println(date);
+                        App app = new App((String) listItems.get(position).get("packageName"),(String) listItems.get(position).get("name"),date);
+
+                        lock_listItems.add(listItems.get(position));
+                        listItems.remove(position);
+                        if(dataBaseUtil.insert(app) == -1){
+                            //  Log.i(tableName, "insert failed! ");
+                        }
+                        else {
+                            // Log.i(tableName, "insert success! ");
+                        }
+                        System.out.println("lock");
+
+                        floatingActionButton.setVisibility(View.INVISIBLE);
+                        adapter.notifyDataSetChanged();
 
 
-                    //listItems.get(position).put("flag", "已锁定");
-                    lock_listItems.add(listItems.get(position));
-                    listItems.remove(position);
-                    if(dataBaseUtil.insert(app) == -1){
-                      //  Log.i(tableName, "insert failed! ");
+                        String status = dataBaseUtil.getStatus();
+                        ArrayList<String> lockList = dataBaseUtil.getAllLocked();
+                        if (status.equals("true")){
+                            Intent intent = new Intent("android.intent.action.MAIN_BROADCAST");
+                            intent.putStringArrayListExtra("lockList", lockList);
+                            intent.putExtra("status", "true");
+                            sendBroadcast(intent);
+                        }else{
+                            Intent intent = new Intent("android.intent.action.MAIN_BROADCAST");
+                            intent.putStringArrayListExtra("lockList", lockList);
+                            intent.putExtra("status","false");
+                            sendBroadcast(intent);
+                        }
+
                     }
-                    else {
-                       // Log.i(tableName, "insert success! ");
-                    }
-                    System.out.println("lock");
-
-                //thread.start();
-                    floatingActionButton.setVisibility(View.INVISIBLE);
-                    adapter.notifyDataSetChanged();
-                    //notifyDataSetChanged();
+                });
+                datePicker.show(getSupportFragmentManager(), "datePicker");
 
 
-
-                String status = dataBaseUtil.getStatus();
-                ArrayList<String> lockList = dataBaseUtil.getAllLocked();
-                if (status.equals("true")){
-                    Intent intent = new Intent("android.intent.action.MAIN_BROADCAST");
-                    intent.putStringArrayListExtra("lockList", lockList);
-                    intent.putExtra("status", "true");
-                    sendBroadcast(intent);
-                }else{
-                    Intent intent = new Intent("android.intent.action.MAIN_BROADCAST");
-                    intent.putStringArrayListExtra("lockList", lockList);
-                    intent.putExtra("status","false");
-                    sendBroadcast(intent);
-                }
             }
         });
 
