@@ -268,7 +268,7 @@ public class MainActivity extends BaseActivity implements MainView {
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                myList.setSelector(new ColorDrawable(getResources().getColor(R.color.third_purple)));
+                myList.setSelector(new ColorDrawable(getResources().getColor(R.color.gray_white)));
                 if (position==prePosition){
                     judge(position);
 
@@ -314,7 +314,7 @@ public class MainActivity extends BaseActivity implements MainView {
                 App app = new App((String) listItems.get(position).get("packageName"),(String) listItems.get(position).get("name"));
 
 
-                    listItems.get(position).put("flag", "已锁定");
+                    //listItems.get(position).put("flag", "已锁定");
                     lock_listItems.add(listItems.get(position));
                     listItems.remove(position);
                     if(dataBaseUtil.insert(app) == -1){
