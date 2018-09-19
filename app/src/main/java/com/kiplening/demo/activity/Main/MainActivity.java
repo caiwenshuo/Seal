@@ -74,6 +74,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
+        System.out.println("main initial");
         setContentView(R.layout.activity_main);
 
 
@@ -316,6 +317,7 @@ public class MainActivity extends BaseActivity implements MainView {
             @Override
             public void onClick(View v) {
                 datePicker = new DatePickerFragment();
+
                 datePicker.setOnDateInputListener(new DatePickerFragment.OnDateInputListener() {
                     @Override
                     public void getDate(int year, int month, int day) {

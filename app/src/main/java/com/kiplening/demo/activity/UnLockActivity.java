@@ -2,6 +2,7 @@ package com.kiplening.demo.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.text.Editable;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 import com.kiplening.demo.MainApplication;
 import com.kiplening.demo.R;
+import com.kiplening.demo.activity.Main.MainActivity;
+import com.kiplening.demo.service.LockService;
 import com.kiplening.demo.tools.DataBaseUtil;
 import com.kiplening.androidlib.activity.BaseActivity;
 
@@ -39,7 +42,7 @@ public class UnLockActivity extends BaseActivity{
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.activity_unlock);
-
+        System.out.println("unlock initial");
         edit = (EditText)this.findViewById(R.id.edit);
         edit.setFocusable(true);
         edit.setFocusableInTouchMode(true);
@@ -70,9 +73,12 @@ public class UnLockActivity extends BaseActivity{
 
                             booleanState.put("isInputPWD",Boolean.TRUE);
                             //System.out.println(MainApplication.getIsInputPED()+" "+isInputPWD);
-                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow((IBinder) edit,InputMethodManager.RESULT_HIDDEN);
+                            //InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            //imm.hideSoftInputFromWindow((IBinder) edit,InputMethodManager.RESULT_HIDDEN);
                             act.finish();
+                          // Intent intent = new Intent(UnLockActivity.this,MainActivity.class);
+                           //startActivity(intent);
+
                         }
                         else {
                             editable.delete(0, start);

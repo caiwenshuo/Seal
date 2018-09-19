@@ -38,7 +38,9 @@
 
         <activity
             android:name=".activity.UnLockActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            />
         <activity
             android:name=".activity.settings.SettingActivity"
             android:label="@string/app_name" />

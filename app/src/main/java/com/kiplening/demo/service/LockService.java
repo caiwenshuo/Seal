@@ -43,7 +43,7 @@ public class LockService extends Service{
 
     //设定检测时间的间隔，间隔太长可能造成已进入软件还未加锁的情况，
     //间隔时间太短则会加大CPU的负荷，程序更耗电。内存占用更大
-    private static long cycleTime = 100;
+    private static long cycleTime = 1000;
 
     @Override
     public void onCreate() {
