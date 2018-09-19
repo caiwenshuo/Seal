@@ -18,8 +18,8 @@ targetSdkVersion 23
 
 关于封印的实现可参考我的博客：
 
-不同程序activity跳转问题 https://blog.csdn.net/weixin_41337483/article/details/82776967
+[不同程序activity跳转问题] (https://blog.csdn.net/weixin_41337483/article/details/82776967)
 
-Android任务栈和activity的跳转中需要特别注意的问题 https://blog.csdn.net/weixin_41337483/article/details/82777395
+[Android任务栈和activity的跳转中需要特别注意的问题] (https://blog.csdn.net/weixin_41337483/article/details/82777395)
 
-listview的listitem点击没反应问题与android焦点  https://blog.csdn.net/weixin_41337483/article/details/82458392
+[listview的listitem点击没反应问题与android焦点]  (https://blog.csdn.net/weixin_41337483/article/details/82458392)
