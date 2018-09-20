@@ -217,7 +217,7 @@ public class LockService extends Service{
             }catch (ParseException e){
                 System.out.println(e.getMessage());
             }
-            if (c >= 0){
+            if (c > 0){
                 dataBaseUtil.delete(app);
             }
 
