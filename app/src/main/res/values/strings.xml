@@ -8,4 +8,6 @@
     <string name="action_check">开启封印</string>
     <string name="about">关于</string>
     <string name="unlock_text"></string>
+    <string name="aboutText">cswenshuo@gmail.com</string>
+    <string name="email">Email: </string>
 </resources>

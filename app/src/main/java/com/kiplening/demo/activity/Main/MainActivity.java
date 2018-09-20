@@ -28,6 +28,7 @@ import com.kiplening.androidlib.activity.BaseActivity;
 import com.kiplening.demo.R;
 import com.kiplening.demo.activity.settings.SettingActivity;
 import com.kiplening.demo.MainApplication;
+import com.kiplening.demo.activity.settings.about;
 import com.kiplening.demo.module.App;
 import com.kiplening.demo.tools.CategoryAdapter;
 import com.kiplening.demo.tools.DataBaseUtil;
@@ -184,6 +185,9 @@ public class MainActivity extends BaseActivity implements MainView {
 
 
 
+        }
+        if (id == R.id.about){
+            navigationToSetting();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -403,7 +407,7 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void navigationToSetting() {
 
-        Intent intent = new Intent(this,SettingActivity.class);
+        Intent intent = new Intent(this,about.class);
         startActivity(intent);
     }
 }
