@@ -5,36 +5,21 @@
     android:layout_height="match_parent"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:paddingTop="10dp"
     android:paddingBottom="0dp"
     tools:context=".UnLockActivity"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="550dp"
+
+        android:src="@drawable/lockicon" />
     <TextView
+        android:id="@+id/unlocktext"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
-    <EditText
-        android:id="@+id/edit"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="input password"
-        android:password="true"
-        android:inputType="number"/>
+        android:layout_height="50dp" />
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
 
-        <android.inputmethodservice.KeyboardView
-            android:id="@+id/keyboard_view"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:background="#ffffff"
-            android:shadowRadius="0.0"
-            android:keyTextColor="#000000"
-            android:visibility="gone" />
-    </RelativeLayout>
+
 
 </LinearLayout>

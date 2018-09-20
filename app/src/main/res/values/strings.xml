@@ -7,4 +7,5 @@
     <string name="notification">开启常驻通知栏</string>
     <string name="action_check">开启封印</string>
     <string name="about">关于</string>
+    <string name="unlock_text"></string>
 </resources>

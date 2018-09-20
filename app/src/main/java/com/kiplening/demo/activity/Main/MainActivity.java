@@ -226,7 +226,7 @@ public class MainActivity extends BaseActivity implements MainView {
             if (isUserApp(packageInfo)) {
                 appList.add(packageInfo.packageName);
                 Map<String, Object> map = new HashMap<>();
-                map.put("info", "installed app");
+
                 map.put("name",
                         packageInfo.applicationInfo.loadLabel(
                                 getPackageManager()).toString());
@@ -235,10 +235,16 @@ public class MainActivity extends BaseActivity implements MainView {
                         .loadIcon(getPackageManager()));
                 if (isLocked(packageInfo, lockedApps)) {
                     map.put("flag", "已锁定");
+                    dataBaseUtil = new DataBaseUtil(MainApplication.getInstance());
+                    String d = dataBaseUtil.getDate(packageInfo.applicationInfo.packageName);
+                    map.put("info",d);
                     lock_listItems.add(map);
+
                     lockList.add(packageInfo.applicationInfo.packageName);
+
                 } else {
                     map.put("flag", "锁定");
+                    map.put("info", "installed");
                     listItems.add(map);
 
                 }
@@ -332,6 +338,8 @@ public class MainActivity extends BaseActivity implements MainView {
                         System.out.println(date);
                         App app = new App((String) listItems.get(position).get("packageName"),(String) listItems.get(position).get("name"),date);
 
+
+                        listItems.get(position).put("info",date);
                         lock_listItems.add(listItems.get(position));
                         listItems.remove(position);
                         if(dataBaseUtil.insert(app) == -1){

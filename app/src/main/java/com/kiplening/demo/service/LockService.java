@@ -19,9 +19,14 @@ import android.util.Log;
 
 import com.kiplening.demo.activity.UnLockActivity;
 import com.kiplening.demo.MainApplication;
+import com.kiplening.demo.module.App;
 import com.kiplening.demo.tools.DataBaseUtil;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,7 +41,6 @@ public class LockService extends Service{
     private final static int LOOPHANDLER = 0;
     private HandlerThread handlerThread = null;
     private DataBaseUtil dataBaseUtil;
-
     private ArrayList<String> lockName = new ArrayList<>();
     private HashMap<String,Boolean> booleanState = MainApplication.getBooleanState();
     private String status;
@@ -68,6 +72,7 @@ public class LockService extends Service{
         }else{
             //开始循环检查
             mHandler = new Handler(handlerThread.getLooper()) {  //getlooper 创建looper
+                @Override
                 public void dispatchMessage(android.os.Message msg) {
                     switch (msg.what) {
                         case LOOPHANDLER:
@@ -80,8 +85,12 @@ public class LockService extends Service{
                              * 可以自行的实验一下
                              * 所以这里用isUnLockActivity变量来做判断的
                             */
+
+                            //判断封锁时间是否到了
+                            update();
+
                             try {
-                                if(isLockName() && !booleanState.get("isInputPWD")){
+                                if(isLockName()){
                                     if (status.equals("true")){
                                         Log.i(TAG, "locking...");
                                         //调用了解锁界面之后，需要设置一下isUnLockActivity的值
@@ -172,10 +181,6 @@ public class LockService extends Service{
 
         boolean isScreenOn = pm.isScreenOn();//如果为true，则表示屏幕“亮”了，否则屏幕“暗”了。
         //如果当前的Activity是桌面app,那么就需要将isUnLockActivity清空值
-        if(getHomes().contains(packageName)){
-            System.out.println("get home screen!");
-            booleanState.put("isInputPWD",Boolean.FALSE);
-        }
 
         for (int i = 0; i < lockName.size(); i++) {
             //System.out.println(lockName.get(i));
@@ -187,25 +192,37 @@ public class LockService extends Service{
         return false;
     }
 
-    private List<String> getHomes() {
-        // TODO Auto-generated method stub
-        List<String> names = new ArrayList<String>();
-        PackageManager packageManager = this.getPackageManager();
-        //属性
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,
-                PackageManager.MATCH_DEFAULT_ONLY);
-        for(ResolveInfo ri : resolveInfo){
-            names.add(ri.activityInfo.packageName);
-//            System.out.println(ri.activityInfo.packageName);
-        }
-        return names;
-    }
+
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    public void update(){
+        String date;
+        SimpleDateFormat sdf;
+        ArrayList<App> lockList = dataBaseUtil.getAll();
+        Calendar calendar = Calendar.getInstance();
+        long c = 0;
+        for (App app : lockList) {
+            date= app.getDate();
+            sdf= new SimpleDateFormat("yyyy-MM-dd");
+            try{
+                Date start = sdf.parse(date);
+                String end1 = sdf.format(calendar.getTime());
+                Date now = sdf.parse(end1);
+                c = now.getTime() - start.getTime();
+            }catch (ParseException e){
+                System.out.println(e.getMessage());
+            }
+            if (c >= 0){
+                dataBaseUtil.delete(app);
+            }
+
+
+        }
+
     }
 }
