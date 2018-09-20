@@ -115,12 +115,12 @@ public class DataBaseUtil {
         Cursor c = db.rawQuery("select * from "+ tableName, null);
         if (c.moveToFirst()) { //判断游标是否为空
             for(int i=0;i<c.getCount();i++){
-                c.move(i);
+
                 if(s.equals(c.getString(0))){
                     result = c.getString(2);
                     return result;
                 }
-
+                c.move(i);
             }
         }
         return result;
